@@ -26,7 +26,7 @@ ALLOWED_HOSTS = env.list(
     default=["127.0.0.1", "localhost"],
 )
 
-ADMIN_URL = env("ADMIN_URL", default="secret-admin/").lstrip("/")
+ADMIN_URL = env("DJANGO_ADMIN_URL", default="secret-admin/").lstrip("/")
 
 DJANGO_APPS = [
     "django.contrib.admin",
@@ -42,6 +42,13 @@ THIRD_PARTY_APPS = [
     # REST API-related
     "rest_framework",
     "drf_spectacular",
+    # Authentication-related
+    "rest_framework.authtoken",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
     # Security & Performance-related
     "debug_toolbar",
     "admin_honeypot",
@@ -63,6 +70,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
@@ -188,3 +196,26 @@ SPECTACULAR_SETTINGS = {
 hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
 TESTING = "test" in sys.argv or "PYTEST_VERSION" in os.environ
+
+########## django-allauth ##########
+# https://github.com/pennersr/django-allauth
+# https://github.com/iMerica/dj-rest-auth
+# part of the built-in Django “sites” framework,
+# a way to host multiple websites from the same Django project
+# django-allauth uses the sites framework, so we must specify a default setting
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+# use below value for SMTP server
+# django.core.mail.backends.smtp.EmailBackend
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = "root@localhost"
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*"]

@@ -10,7 +10,6 @@ from drf_spectacular.views import (
 urlpatterns = [
     # Fake admin for blocking attackers
     path("admin/", include("admin_honeypot.urls", namespace="admin_honeypot")),
-    # SECURITY WARNING: Change admin url to something safe
     path(settings.ADMIN_URL, admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),  # Browsable API by DRF
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
