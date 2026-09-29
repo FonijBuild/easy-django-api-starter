@@ -1,0 +1,3 @@
+- API-first design
+- All django app's name must be plurals.
+- All API endpoints must be at a consistent path of api/.
