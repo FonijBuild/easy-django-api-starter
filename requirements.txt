@@ -1,3 +1,31 @@
-# To ensure app dependencies are ported from your virtual environment/host machine into your container, run 'pip freeze > requirements.txt' in the terminal to overwrite this file
-django==5.0.1
-gunicorn==21.2.0
+asgiref==3.12.1
+attrs==26.1.0
+certifi==2026.7.22
+charset-normalizer==3.5.2
+dj-rest-auth==7.2.0
+django==6.1.1
+django-admin-honeypot @ git+https://github.com/dmpayton/django-admin-honeypot.git@a840496d183df89965eeb33c9a5dd9ea3919dfff
+django-allauth==65.19.5
+django-cors-headers==4.9.0
+django-debug-toolbar==8.0.0
+django-environ==0.14.0
+django-ipware==8.0.0
+djangorestframework==3.18.1
+drf-spectacular==0.30.0
+gunicorn==26.2.0
+idna==3.20
+inflection==0.5.1
+jsonschema==4.26.0
+jsonschema-specifications==2025.9.1
+psycopg==3.3.6
+psycopg-binary==3.3.6
+python-ipware==4.1.0
+pyyaml==6.0.3
+referencing==0.37.0
+requests==2.34.2
+rpds-py==2026.6.3
+ruff==0.16.9
+sqlparse==0.6.0
+uritemplate==4.2.0
+urllib3==2.8.0
+whitenoise==6.12.0

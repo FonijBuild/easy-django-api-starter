@@ -17,6 +17,8 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
     curl \
+    git \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 # ---- Copy requirements ----
@@ -30,8 +32,6 @@ RUN pip install --upgrade pip && \
 COPY . .
 
 # ---- RUN executables ----
-RUN python manage.py check
-RUN python manage.py collectstatic --noinput
 RUN chmod +x /app/scripts/entrypoint.sh
 
 # ---- Expose port ----
