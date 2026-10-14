@@ -43,6 +43,9 @@ ps:
 shell:
 	docker compose exec $(SERVICE) python manage.py shell
 
+app:
+	docker compose exec $(SERVICE) python manage.py startapp
+
 migrate:
 	docker compose exec $(SERVICE) python manage.py migrate
 
@@ -57,6 +60,9 @@ superuser:
 
 collectstatic:
 	docker compose exec $(SERVICE) python manage.py collectstatic --noinput
+
+secretkey:
+	uv run python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 
 dbshell:
 	docker compose exec $(SERVICE) python manage.py dbshell
